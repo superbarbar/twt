@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: x-to-discord
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --workers 1 --threads 4 --timeout 120 app:app
+    envVars:
+      - key: X_BEARER_TOKEN
+        sync: false
+      - key: DISCORD_WEBHOOK_URL
+        sync: false
+      - key: X_USERNAME
+        value: itsyourfatb0i
+      - key: POLL_SECONDS
+        value: "60"
+      - key: INCLUDE_REPLIES
+        value: "false"
